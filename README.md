@@ -5,65 +5,53 @@ A modular C implementation of classical numerical root-finding methods.
 ## Overview
 
 This project implements several classical numerical methods for finding
-roots of nonlinear equations. The methods are implemented as independent
-C modules with a common numerical result structure.
+roots of nonlinear equations. Each method is implemented as an independent
+C module with a common numerical result structure.
 
-Currently implemented:
+### Implemented Methods
 
 - Bisection Method
 - Newton-Raphson Method
 - Secant Method
 - Regula Falsi Method
 
-The project also includes a Makefile for compilation and a GitHub Actions
-workflow for automated build verification.
+The toolkit includes:
+
+- Modular C interfaces and implementations
+- Convergence and error reporting
+- Invalid-input handling
+- Iteration-limit detection
+- Automated numerical tests
+- Makefile-based build and test system
+- GitHub Actions continuous integration
 
 ## Example Problem
 
-The toolkit is demonstrated on the nonlinear equation:
+The toolkit is demonstrated on the nonlinear equation
 
-f(x) = x^3 - x - 2
+f(x) = x³ - x - 2
 
-using an initial interval of [1, 2] and a tolerance of 10^-6.
+using an initial interval [1, 2] and a tolerance of 10⁻⁶.
 
-All four methods converge to approximately:
+The methods converge to approximately:
 
 x ≈ 1.5213797068
 
-## Results
+### Example Results
 
-| Method | Approximate Root | Iterations |
-|---|---:|---:|
-| Bisection | 1.5213799477 | 20 |
-| Newton-Raphson | 1.5213797068 | 3 |
-| Secant | 1.5213797068 | 5 |
-| Regula Falsi | 1.5213794618 | 12 |
+| Method | Approximate Root |
+|---|---:|
+| Bisection | 1.521379... |
+| Newton-Raphson | 1.521379... |
+| Secant | 1.521379... |
+| Regula Falsi | 1.521379... |
 
-The iteration counts depend on the starting values and stopping criterion.
+The exact iteration count depends on the method, starting values,
+tolerance and stopping criterion.
 
-## Project Structure
+## Building
 
-```text
-numerical-methods-toolkit-c/
-│
-├── .github/
-│   └── workflows/
-│       └── build.yml
-│
-├── include/
-│   ├── bisection.h
-│   ├── newton.h
-│   ├── regula_falsi.h
-│   ├── result.h
-│   └── secant.h
-│
-├── src/
-│   ├── bisection.c
-│   ├── main.c
-│   ├── newton.c
-│   ├── regula_falsi.c
-│   └── secant.c
-│
-├── .gitignore
-├── Makefile
-└── README.md
+Compile the project using:
+
+```bash
+make
