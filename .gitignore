@@ -1,0 +1,8 @@
+# Compiled executable
+numerical_toolkit
+
+# Object files
+*.o
+
+# Debug files
+*.out
