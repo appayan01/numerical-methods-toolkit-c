@@ -60,7 +60,7 @@ int main(void)
           result.status == MAX_ITERATIONS);
 
     /* Newton-Raphson: successful convergence */
-    result = newton_raphson(function, derivative, 1.5, 0.000001);
+    result = newton_raphson(function, derivative, 1.5, 0.000001, 100);
 
     check("Newton-Raphson converges",
           result.status == SUCCESS &&
@@ -68,10 +68,15 @@ int main(void)
 
     /* Newton-Raphson: zero derivative */
     result = newton_raphson(function, derivative,
-                             sqrt(1.0 / 3.0), 0.000001);
+                        sqrt(1.0 / 3.0), 0.000001, 100);
 
     check("Newton-Raphson detects zero derivative",
           result.status == ZERO_DERIVATIVE);
+    /* Newton-Raphson: maximum iterations */
+result = newton_raphson(function, derivative, 1.5, 0.0000000001, 1);
+
+check("Newton-Raphson detects maximum iterations",
+      result.status == MAX_ITERATIONS);
 
     /* Secant: successful convergence */
     result = secant(function, 1.5, 2.0, 0.000001);
