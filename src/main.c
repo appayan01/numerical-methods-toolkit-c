@@ -59,7 +59,7 @@ int main(void)
         bisection(function, a, b, tolerance, max_iterations);
 
     newton_result =
-        newton_raphson(function, derivative, x0, tolerance);
+    newton_raphson(function, derivative, x0, tolerance, 100);
 
     secant_result =
         secant(function, x0, x1, tolerance);
