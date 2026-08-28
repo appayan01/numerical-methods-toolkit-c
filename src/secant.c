@@ -1,29 +1,53 @@
 #include "secant.h"
 
-Result secant(Function f, double x0, double x1, double tolerance)
+Result secant(Function f, double x0, double x1,
+              double tolerance)
 {
     Result result;
-    double x2;
-    double error;
+
+    double x2 = x1;
+    double error = 0.0;
     int iteration = 0;
 
-    do
+    while (iteration < 100)
     {
-        x2 = x1 - f(x1) * (x1 - x0) / (f(x1) - f(x0));
+        double denominator = f(x1) - f(x0);
+
+        if (denominator == 0.0)
+        {
+            result.root = x1;
+            result.iterations = iteration;
+            result.error = error;
+            result.status = ZERO_DENOMINATOR;
+            return result;
+        }
+
+        x2 = x1 - f(x1) * (x1 - x0) / denominator;
 
         error = x2 - x1;
 
-        x0 = x1;
-        x1 = x2;
+        if (error < 0)
+            error = -error;
 
         iteration++;
 
-    } while ((error < -tolerance || error > tolerance)
-             && iteration < 100);
+        if (error < tolerance)
+        {
+            result.root = x2;
+            result.iterations = iteration;
+            result.error = error;
+            result.status = SUCCESS;
+            return result;
+        }
 
-    result.root = x1;
+        x0 = x1;
+        x1 = x2;
+    }
+
+    result.root = x2;
     result.iterations = iteration;
-    result.error = error < 0 ? -error : error;
+    result.error = error;
+    result.status = MAX_ITERATIONS;
 
     return result;
 }
