@@ -1,4 +1,4 @@
-name: Build C Project
+name: Build and Test
 
 on:
   push:
@@ -18,3 +18,6 @@ jobs:
 
       - name: Build project
         run: make
+
+      - name: Run test suite
+        run: make test
