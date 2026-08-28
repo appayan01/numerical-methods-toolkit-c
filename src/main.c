@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "bisection.h"
 #include "newton.h"
+#include "secant.h"
 
 double function(double x)
 {
@@ -17,14 +18,20 @@ int main(void)
     double a = 1.0;
     double b = 2.0;
     double x0 = 1.5;
+    double x1 = 2.0;
     double tolerance = 0.000001;
 
     Result bisection_result;
     Result newton_result;
+    Result secant_result;
 
     bisection_result = bisection(function, a, b, tolerance);
 
-    newton_result = newton_raphson(function, derivative, x0, tolerance);
+    newton_result =
+        newton_raphson(function, derivative, x0, tolerance);
+
+    secant_result =
+        secant(function, x0, x1, tolerance);
 
     printf("Numerical Methods Toolkit\n");
     printf("=========================\n");
@@ -40,6 +47,12 @@ int main(void)
     printf("Root: %.10f\n", newton_result.root);
     printf("Iterations: %d\n", newton_result.iterations);
     printf("Final error: %.10f\n", newton_result.error);
+
+    printf("\nSecant Method\n");
+    printf("-------------\n");
+    printf("Root: %.10f\n", secant_result.root);
+    printf("Iterations: %d\n", secant_result.iterations);
+    printf("Final error: %.10f\n", secant_result.error);
 
     return 0;
 }
